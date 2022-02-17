@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        h1,h2,h4
+        {
+        color:white;
+        }
+
+    </style>
+</head>
+<body style="background-image : url({% static 'images/hotel 55.jpg' %}); background-size: cover; background-repeat: no-repeat;" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+          {% if user.is_authenticated %}
+        <div class="dropdown" style="margin-right: 80px;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    {{user.username}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="{% url 'logout_request' %}">Logout</a></li>
+  </ul>
+</div>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+<center>
+    <b><h1>HOTEL PARADISE</h1></b>
+
+</center>
+<h2>BOOKINGDETAILS</h2>
+<table class="table table-border">
+    <tr>
+         <th><h4>Room Number</h4></th>
+        <th><h4>From Date</h4></th>
+        <th><h4>To Date</h4></th>
+         <th><h4>Amount</h4></th>
+        <th><h4>No of days</h4></th>
+        <th><h4>Total Amount</h4></th>
+         <th><h4>number of beds</h4></th>
+        <th></th>
+    </tr>
+
+{% for k in temp %}
+
+    <form action="{% url 'booked_view'  %}" method="post">
+        {% csrf_token %}
+
+<tr>
+    <td><h4>{{k.room_no}}</h4></td>
+    <td><h4>{{k.from_date}}</h4></td>
+    <td><h4>{{k.to_date}}</h4></td>
+    <td><h4>{{k.amount}}</h4></td>
+    <td><h4>{{k.no_of_days }}</h4></td>
+    <td><h4>{{k.total_amount }}</h4></td>
+    <td><h4>{{k.no_bed}}</h4></td>
+    <td><a href="{% url 'payment' %}"><button type="button" >PAY</button></a></td>
+
+    </td>
+</tr>
+
+{% endfor %}
+
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{%  load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<center>
+<div class="container"></div>
+    <form action="{% url 'reset_password_page' %}" method="post">
+        {% csrf_token %}
+<h2>Reset Password</h2>
+<input type="email" name="email" placeholder="enter your mail"><br><br>
+<input type="password" name="password1" placeholder="enter your new password"><br><br>
+<input type="password" name="password2" placeholder="confirm password" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}"title="contain atlest one number and one upper case letter"><br><br>
+<button type="submit" class="btn btn-primary" value="submit">submit</button><br>
+</center>
+</div>
+</body>
+</html>
+

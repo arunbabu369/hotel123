@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<h1>ROOM BOOKING</h1>
+
+<table class="table table-border">
+    <tr>
+        <th>room number</th>
+        <th>Room type</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    {% for i in l %}
+    <form action="{% url 'list'  %}" method="post">
+
+<tr>
+    <td>{{i.room_no}}</td>
+    <td>{{i.room_type }}</td>
+    <td>{{i.date}}</td>
+    <td>{{i.price}}</td>
+    <td>
+        <a href="{% url 'booking_page' i.id %}" class="btn btn-primary">BOOK NOW</button></a>
+    </td>
+</tr>
+
+    </form>
+    {% endfor %}
+
+
+
+</table>
+</body>
+</html>

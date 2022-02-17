@@ -1,0 +1,75 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    </script>
+   <style>
+h1
+{
+color:grey;
+}
+h4
+{
+color:white;
+}
+   </style>
+</head>
+<body style="background-image : url('{% static 'images/hotel2.jpg' %}'); background-size: cover; background-repeat: no-repeat;" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"<a href="{% url 'login' %}">HOME</a></li>
+        </li>
+      </ul>
+      <div class="d-flex">
+          {% if user.is_authenticated %}
+        <div class="dropdown" style="margin-right: 80px;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    {{user.username}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="{% url 'logout_request' %}">Logout</a></li>
+      <li><a class="dropdown-item" href="{% url 'summary' %}">history</a></li>
+  </ul>
+</div>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+<center>
+<h1>WELCOME HOTEL PARADISE</h1>
+
+        {% if user.is_authenticated %}
+  <form action="{% url 'roomtype_view' %}" method="post">
+      {% csrf_token %}
+      <label><h4>select rooms:</h4></label>
+  <select name="cars" id="cars" >
+    <option value="AC">AC</option>
+    <option value="NON AC">NON_AC</option>
+    <option value="DELUXE">DELUXE</option>
+    <option value="NON DELUXE">NON-DELUXE</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+  </form>
+
+        {% else %}
+        <li><a href="{% url 'chanjal' %}">SIGNUP</a></li>
+        <li><a href="{% url 'login' %}">LOGIN</a></li>
+        {% endif %}
+
+</center>
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+
+</body>
+</html>
